@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { AssemblyModule } from './assembly/assembly.module';
+import { SajatDataSourceService } from './shared/data_source/sajat-data-source/sajat-data-source.service';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { AssemblyModule } from './assembly/assembly.module';
     AssemblyModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, SajatDataSourceService],
 })
 export class AppModule {}

@@ -18,7 +18,7 @@ export class SajatDataSourceService
     super({
       type: configService.get<DataSource_t>('DB_DRIVER')!,
       host: configService.get<string>('DB_HOST'),
-      port: configService.get<number>('DB_PORT'),
+      port: +configService.get<number>('DB_PORT')!,
       username: configService.get<string>('DB_USERNAME'),
       password: configService.get<string>('DB_PASSWORD'),
       database: configService.get<string>('DB_DATABASE'),
@@ -28,6 +28,7 @@ export class SajatDataSourceService
 
   async onApplicationBootstrap() {
     try {
+      this.log.verbose('Connecting to Sajat Data Source...');
       await this.initialize();
       if (this.isInitialized) {
         this.log.log('Connected to DB Successfully!');
@@ -36,8 +37,9 @@ export class SajatDataSourceService
         throw new Error(ERR_DATA_SOURCE_NOT_INITIALIZED);
       }
     } catch (e) {
-      this.log.fatal(e);
-      throw e;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      this.log.fatal(e.message);
+      process.exit(1);
     }
   }
 }
