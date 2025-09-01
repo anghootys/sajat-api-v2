@@ -2,9 +2,8 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { AssemblyModule } from './assembly/assembly.module';
-import { SajatDataSourceService } from './shared/data_source/sajat-data-source/sajat-data-source.service';
 import { CacheLessMiddleware } from './shared/chache-less/cache-less-middleware.service';
+import { AssemblyModule } from './assembly/assembly.module';
 
 @Module({
   imports: [
@@ -14,7 +13,7 @@ import { CacheLessMiddleware } from './shared/chache-less/cache-less-middleware.
     AssemblyModule,
   ],
   controllers: [AppController],
-  providers: [AppService, SajatDataSourceService],
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

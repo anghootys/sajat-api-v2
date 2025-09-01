@@ -6,7 +6,7 @@ import { CacheTTL } from '@nestjs/common/cache';
 export class AppController {
   constructor(private readonly appService: appService.AppService) {}
 
-  @Get('/ping')
+  @Get('ping')
   @CacheTTL(0) // stop cache on this api
   ping(): appService.IPong {
     return this.appService.ping();
