@@ -23,6 +23,10 @@ export class SajatDataSourceService
       password: configService.get<string>('DB_PASSWORD'),
       database: configService.get<string>('DB_DATABASE'),
       synchronize: false,
+      options: {
+        encrypt: true,
+        trustServerCertificate: true,
+      },
     });
   }
 
